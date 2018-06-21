@@ -1,0 +1,94 @@
+\documentclass[german]{beamer}
+
+\usetheme{hhu}
+
+\usepackage[german]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{tabularx}
+
+\colorlet{titlebg}{hhuCorporateBlue}
+\colorlet{titlecolor}{hhuCorporateGrey}
+\colorlet{codebg}{hhuCorporateGrey}
+\colorlet{numberbg}{white!50!hhuCorporateGrey}
+\colorlet{languagebg}{white!50!hhuCorporateGrey}
+
+\usepackage{minted}
+
+% https://gist.github.com/mutbuerger/e65575180b99e9074129
+\usepackage{tcolorbox}
+\tcbuselibrary{skins, breakable}
+\usetikzlibrary{shadings, backgrounds}
+\newtcolorbox{bpbox}[2][]
+{%
+	enhanced,
+	colbacktitle=titlebg,
+	coltitle=titlecolor,
+	interior style={%
+		top color=codebg,
+		bottom color=codebg
+	},
+	boxrule=0mm,
+	arc=0.6mm,
+	width= (\linewidth),
+	fonttitle=\footnotesize,
+	adjusted title=\texttt{#1},
+	after title={%
+		\hfill\setlength{\fboxsep}{1.6pt}
+		\colorbox{languagebg}{\textcolor{black}
+			{\footnotesize{\texttt{#2}}}}
+	},
+	overlay={%
+		\begin{tcbclipinterior}\fill[numberbg] (frame.south west)
+			rectangle ([xshift=5mm]frame.north west);
+		\end{tcbclipinterior}
+	},
+	top=0mm,
+	bottom=0mm,
+	left=5mm,
+	right=0mm
+}
+
+\newmintedfile{cpp}{
+	linenos,
+	autogobble,
+	breaklines=true,
+	breaksymbol=,
+	breakindent=4mm,
+	breakbefore=.,
+	breakbeforesymbolpre=,
+	breakbeforesymbolpost=,
+	baselinestretch=0.8,
+	framesep=5mm,
+	numbersep=7pt,
+	fontsize=\footnotesize,
+	style=manni
+}
+
+
+
+\title{hhuOS}
+\date{18. Juli 2018}
+\author{Burak Akguel, Christian Geese, Filip Krakowski, Fabian Ruhland}
+\institute{Institut für Informatik \\
+	Heinrich-Heine-Universität Düsseldorf}
+
+\begin{document}
+	
+	\maketitle
+	
+	\section{Einleitung}
+	
+	\begin{frame}{Einleitung}
+	
+		\begin{bpbox}[code/example.cpp]{C++}
+%			\color{mintedtext}
+			\cppfile{code/example.cpp}
+		\end{bpbox}
+		
+	\end{frame}
+
+	\begin{frame}[standout]
+			\Large Fragen
+	\end{frame}
+
+\end{document}
