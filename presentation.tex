@@ -7,10 +7,10 @@
 \usepackage{tabularx}
 
 \colorlet{titlebg}{hhuCorporateBlue}
-\colorlet{titlecolor}{hhuCorporateGrey}
-\colorlet{codebg}{hhuCorporateGrey}
-\colorlet{numberbg}{white!50!hhuCorporateGrey}
-\colorlet{languagebg}{white!50!hhuCorporateGrey}
+\colorlet{titlecolor}{hhuCorporateGrey!20!white}
+\colorlet{codebg}{hhuCorporateGrey!30!white}
+\colorlet{numberbg}{hhuCorporateGrey!50!white}
+\colorlet{languagebg}{hhuCorporateGrey!20!white}
 
 \usepackage{minted}
 
@@ -33,7 +33,7 @@
 	fonttitle=\footnotesize,
 	adjusted title=\texttt{#1},
 	after title={%
-		\hfill\setlength{\fboxsep}{1.6pt}
+		\hfill\setlength{\fboxsep}{2pt}
 		\colorbox{languagebg}{\textcolor{black}
 			{\footnotesize{\texttt{#2}}}}
 	},
