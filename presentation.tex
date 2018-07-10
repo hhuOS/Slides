@@ -9,6 +9,8 @@
 \colorlet{titlebg}{hhuCorporateBlue}
 \colorlet{titlecolor}{hhuCorporateGrey!20!white}
 \colorlet{codebg}{hhuCorporateGrey!30!white}
+\colorlet{termbg}{hhuCorporateGrey!10!black}
+\colorlet{termfg}{hhuCorporateGrey!20!white}
 \colorlet{numberbg}{hhuCorporateGrey!50!white}
 \colorlet{languagebg}{hhuCorporateGrey!20!white}
 
@@ -18,7 +20,7 @@
 \usepackage{tcolorbox}
 \tcbuselibrary{skins, breakable}
 \usetikzlibrary{shadings, backgrounds}
-\newtcolorbox{bpbox}[2][]
+\newtcolorbox{codeblock}[2][]
 {%
 	enhanced,
 	colbacktitle=titlebg,
@@ -48,6 +50,25 @@
 	right=0mm
 }
 
+\newtcolorbox{terminalblock}[1][]
+{%
+	enhanced,
+	colbacktitle=titlebg,
+	coltitle=titlecolor,
+	interior style={%
+		top color=termbg,
+		bottom color=termbg
+	},
+	boxrule=0mm,
+	arc=0.6mm,
+	width= (\linewidth),
+	fonttitle=\footnotesize,
+	top=1mm,
+	bottom=0mm,
+	left=1mm,
+	right=1mm
+}
+
 \newmintedfile{cpp}{
 	linenos,
 	autogobble,
@@ -64,28 +85,40 @@
 	style=manni
 }
 
+\newmintedfile{text}{
+	autogobble,
+	breaklines=true,
+	breaksymbol=,
+	breakindent=4mm,
+	breakbefore=.,
+	breakbeforesymbolpre=,
+	breakbeforesymbolpost=,
+	baselinestretch=0.8,
+	framesep=5mm,
+	fontsize=\footnotesize
+}
 
+\AtBeginEnvironment{terminalblock}{\color{white}}
 
 \title{hhuOS}
 \date{18. Juli 2018}
 \author{Burak Akguel, Christian Gesse, Filip Krakowski, Fabian Ruhland}
-\institute{Institut für Informatik \\
-	Heinrich-Heine-Universität Düsseldorf}
+\institute{Institute of Computer Science \\
+	Heinrich-Heine-University Düsseldorf}
 
 \begin{document}
 	
 	\maketitle
 	
-	\section{Einleitung}
+	\section{Introduction}
 	
-	\begin{frame}{Einleitung}
+	\begin{frame}{Introduction}
 	
-		\begin{bpbox}[code/example.cpp]{C++}
-%			\color{mintedtext}
-			\cppfile{code/example.cpp}
-		\end{bpbox}
+		
 		
 	\end{frame}
+
+	\include{sections/features}
 
 	\begin{frame}[standout]
 			\Large Fragen

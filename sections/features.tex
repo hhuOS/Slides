@@ -1,0 +1,44 @@
+\begin{frame}{Kernel Modules}
+
+	\begin{center}
+		hhuOS supports loading kernel modules at runtime
+	\end{center}
+	
+	\begin{center}
+		\begin{minipage}{0.725\textwidth}
+			\begin{codeblock}[code/Modules.cpp]{C++}
+				\cppfile{code/Modules.cpp}
+			\end{codeblock}
+		\end{minipage}
+	\end{center}
+	
+	\begin{center}
+		compiled modules can be placed on an external storage device
+	\end{center}
+
+\end{frame}
+
+\begin{frame}{Library Features}
+
+\begin{center}
+	Array copies can be created using a simple assignment
+\end{center}
+
+\begin{center}
+	\begin{minipage}{0.55\textwidth}
+		\begin{codeblock}[code/Arrays.cpp]{C++}
+			\cppfile{code/Arrays.cpp}
+		\end{codeblock}
+	\end{minipage}
+
+	\vspace{5pt}
+	
+	\begin{minipage}{0.22\textwidth}
+		\begin{terminalblock}
+			\color{termfg}
+			\textfile{code/Arrays.log}
+		\end{terminalblock}
+	\end{minipage}
+\end{center}
+
+\end{frame}
