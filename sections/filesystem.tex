@@ -1,0 +1,19 @@
+\section{Filesystem}
+
+\begin{frame}{Storage}
+\begin{itemize}
+	\item \textit{StorageDevice} as interface for block devices
+	\item Only 5 methods: \textit{getSectorCount()} \textit{getSectorSize()}, \textit{read()}, \textit{write()}, \textit{getHardwareName()}
+	\item Implemented for AHCI, EHCI, Floppy, Virtual Drives, and Partitions
+	\item File in \textit{/dev} for every device (similar to Linux)
+\end{itemize}	
+\end{frame}
+
+\begin{frame}{Virtual File System}
+\begin{itemize}
+	\item Overlay over physical file systems
+	\item Storage devices can be mounted to any folder
+	\item Interface \textit{FsDriver} for physical file systems
+	\item Currently, only FAT is supported as physical file system
+\end{itemize}	
+\end{frame}
