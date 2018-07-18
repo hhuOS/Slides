@@ -3,7 +3,7 @@
 \begin{frame}{Storage}
 \begin{itemize}
 	\item \textit{StorageDevice} as interface for block devices
-	\item Only 5 methods: \textit{getSectorCount()} \textit{getSectorSize()}, \textit{read()}, \textit{write()}, \textit{getHardwareName()}
+	\item Only 5 methods: \textit{getSectorCount()}, \textit{getSectorSize()}, \textit{read()}, \textit{write()}, \textit{getHardwareName()}
 	\item Implemented for AHCI, EHCI, Floppy, Virtual Drives, and Partitions
 	\item File in \textit{/dev} for every device (similar to Linux)
 \end{itemize}	
