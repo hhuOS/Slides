@@ -1,19 +1,23 @@
 \section{Filesystem}
 
-\begin{frame}{Storage}
-\begin{itemize}
-	\item \textit{StorageDevice} as interface for block devices
-	\item Only 5 methods: \textit{getSectorCount()}, \textit{getSectorSize()}, \textit{read()}, \textit{write()}, \textit{getHardwareName()}
-	\item Implemented for AHCI, EHCI, Floppy, Virtual Drives, and Partitions
-	\item File in \textit{/dev} for every device (similar to Linux)
-\end{itemize}	
+\begin{frame}{Storage Devices}
+	\begin{itemize}
+		\setlength\itemsep{1em}
+		\item \textit{StorageDevice} as interface for block devices
+		\item Only 4 methods: \textit{getSectorCount()}, \textit{getSectorSize()}, \textit{read()}, \textit{write()}
+		\item Implemented for AHCI (hard drives), Floppy, Virtual Drives, and Partitions
+	\end{itemize}	
 \end{frame}
 
 \begin{frame}{Virtual File System}
-\begin{itemize}
-	\item Overlay over physical file systems
-	\item Storage devices can be mounted to any folder
-	\item Interface \textit{FsDriver} for physical file systems
-	\item Currently, only FAT is supported as physical file system
-\end{itemize}	
+	\begin{itemize}
+		\setlength\itemsep{1em}
+		\item Overlay over physical file systems (e.g. FAT)
+		\item Storage devices can be mounted to any folder
+		\item Files and directories are represented by \texttt{Filesystem::Node} (similar to \textit{INode})
+		\item Interface \texttt{Filesystem::Driver} for physical file systems
+		\item Integrate \textit{FatFs}\footnotemark[1] to support all FAT variants
+	\end{itemize}
+	\vspace{3.0em}
+	\footnotemark[1]\footnotesize{\url{http://elm-chan.org/fsw/ff/00index_e.html}}
 \end{frame}

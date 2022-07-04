@@ -1,18 +1,28 @@
-\documentclass[german,aspectratio=169]{beamer}
+%
+% Example document for using the hhuBeamer-class.
+% PLEASE read carefully.
+%
 
-\usetheme{hhuos}
+% You can change fontsize here - the titlepage has fixed font size
+\documentclass[11pt]{beamer}
 
-\usepackage[german]{babel}
-\usepackage[utf8]{inputenc}
-\usepackage{tabularx}
+% you can switch between "english" and "german"
+% there might be some babel-error on the first compile time
+% but normally it can be ignored
+% Use frametitlestandard for standard psoition of frametitle
+% or framtetitletop for top-position of frametitle
+\usetheme[english,frametitletop]{hhu}
 
-\colorlet{titlebg}{hhuCorporateBlue}
-\colorlet{titlecolor}{hhuCorporateGrey!20!white}
-\colorlet{codebg}{hhuCorporateGrey!30!white}
-\colorlet{termbg}{hhuCorporateGrey!10!black}
-\colorlet{termfg}{hhuCorporateGrey!20!white}
-\colorlet{numberbg}{hhuCorporateGrey!50!white}
-\colorlet{languagebg}{hhuCorporateGrey!20!white}
+%
+% Note: Use \hhu to insert the correct spelling of the HHU's name
+% Note: Use \noframetitle for frames without title
+% Note: Use \begin{highlighted}...\end{highlighted} to emphasize formulas
+% Note: There are predefined colors hhuX with 
+%		X = Blue,Green,Red,Orange,Darkblue,Iceblue,Turquoise,Black.
+%		Please use only these colors and use hhuBlack and hhuBlue
+%		as standard colors.
+%
+%
 
 \usepackage{minted}
 
@@ -101,14 +111,13 @@
 \AtBeginEnvironment{terminalblock}{\color{white}}
 
 \title{hhuOS}
-\date{18. Juli 2018}
-\author{Burak Akgül, Christian Gesse, Filip Krakowski, Fabian Ruhland}
-\institute{Institute of Computer Science \\
-	Heinrich-Heine-University Düsseldorf}
+\date{07.07.2022\\Institute of Computer Science \\Heinrich-Heine-University Düsseldorf}
+\author{Christian Gesse, Fabian Ruhland}
+\institute{}
 
 \begin{document}
 	
-	\maketitle
+	\frame[plain]{\maketitle}
 	
 	\include{sections/introduction}
 	
@@ -116,14 +125,14 @@
 
 	\include{sections/filesystem}
 
-	\include{sections/features}
+	\include{sections/process}
 	
 	\include{sections/todo}
 	
-	\begin{frame}[standout]{Demo}
-		\begin{center}
-			\includegraphics[width=.6\textwidth]{img/hhuos_main}
-		\end{center}	
-	\end{frame}
+	%\begin{frame}[standout]{Demo}
+	%	\begin{center}
+	%		\includegraphics[width=.6\textwidth]{img/hhuos_main}
+	%	\end{center}	
+	%\end{frame}
 
 \end{document}

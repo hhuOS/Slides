@@ -1,31 +1,51 @@
 \section{Introduction}
 	
 	\begin{frame}{Facts about hhuOS}
-%		\begin{minipage}{0.5\textwidth}
-%			\includegraphics[width=\textwidth]{img/hhuos_main}
-%		\end{minipage}
-%		\begin{minipage}{0.45\textwidth}
-%			\begin{itemize}
-%				\item A small operating system for teaching and learning purposes
-%				\item written for x86 32-bit architecture (64-bit maybe later)
-%				\item written in C++ and x86-Assembler using g++ and nasm
-%				\item Open-Source, published under the GPL v3 license
-%			\end{itemize}
-%		\end{minipage}
 	\begin{itemize}
+		\setlength\itemsep{1em}
 		\item A small operating system for teaching and learning purposes
-		\item written for x86 32-bit architecture (64-bit maybe later)
-		\item written in C++ and x86-Assembler using g++ and nasm
+		\item written for x86 32-bit architecture
+		\item written in C++ and x86-Assembler using gcc and nasm
 		\item Open-Source, published under the GPL v3 license
+		\item $\sim25000$ lines of code
 	\end{itemize}
 	\end{frame}
 	
 	\begin{frame}{hhuOS - Features}
 		\begin{itemize}
-			\item Round-robin based preemptive scheduling for threads
-			\item Support for AHCI, USB (partially), PCI and VESA-Graphics
-			\item Different memory managers
-			\item Paging with higher half kernel
-			\item FAT- Filesystem and VFS
+			\item Processes \& Threads
+			\begin{itemize}
+				\item Round-Robin based preemptive scheduling
+				\item Binary files are executed as processes
+				\item Each process has its own address space
+			\end{itemize}
+			\pause
+			\item Adress spaces and memory management
+			\begin{itemize}
+				\item Using x86-Paging mechanism (virtual/physical memory)
+				\item Lazy mapping implementation
+				\item Kernel address space is always mapped at 3 GiB (not accessible from user space)
+				\item Different memory managing algorithms are implemented (Free List, Bitmap, Table)
+			\end{itemize}
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}{hhuOS - Features}
+		\begin{itemize}
+			\item Unified Library
+			\begin{itemize}
+				\item Single codebase for user- and kernel-space library
+				\item Functions requiring kernel access are outsourced into an interface (implemented two time - for kernel and user space)
+				\item Kernel access from user space via system calls (software interrupts)
+			\end{itemize}
+			\pause
+			\item Further features
+			\begin{itemize}
+				\item Virtual Filesystem (can mount physical filesystems)
+				\item Hardware support (Keyboard, PCI, Floppy AHCI, VESA \& CGA Graphics)
+				\item Compatible with UEFI and BIOS systems (BIOS calls are supported)
+				\item Own UEFI bootloader (towboot, developed by Niklas Sombert)
+				\item Experimental support for networking, thanks to several bachelors thesis (2 drivers and a UDP/IP Stack)
+			\end{itemize}	
 		\end{itemize}
 	\end{frame}

@@ -1,0 +1,13 @@
+\section{Processes \& Threads}
+
+\begin{frame}{Process Scheduling}
+	\begin{itemize}
+		\setlength\itemsep{1em}
+		\item Global scheduler manages processes in a queue
+		\item Timer invokes scheduler every 10ms to switch to next process (and address space)
+		\item Each process has a separate thread scheduler, switching the current thread each time the process becomes active
+		\item Threads can be blocked and unblocked by other threads
+		\item Threads can sleep for a defined time
+		\item It is possible to join other threads (or processes)
+	\end{itemize}	
+\end{frame}

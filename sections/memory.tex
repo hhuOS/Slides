@@ -1,41 +1,37 @@
 \section{Memory \& Paging}
 
-\begin{frame}{Overview : Memory \& Paging}
-\begin{itemize}
-	\item Paging is used to abstract physical memory from virtual address spaces
-	\item new pages can be mapped in/out dynamically
-	\item it is possible to create different address spaces
-	\item Kernel is mapped at 3GB $\rightarrow$ Higher-Half-Kernel
-	\item the addresses above 3GB are mapped into all address spaces as Kernelspace
-	\item everything below 3GB can be used for usermode later
-\end{itemize}	
+\begin{frame}{Overview: Memory \& Paging}
+	\begin{itemize}
+		\setlength\itemsep{1em}
+		\item Paging: Abstract physical memory from virtual address spaces
+		\item New pages can be mapped in/out dynamically
+		\item Use of different address spaces for process separation
+		\item Kernel is mapped at 3 GiB $\rightarrow$ Higher-Half-Kernel (always visible)
+		\item Adresses below 3 GiB are used for user space memory
+	\end{itemize}	
 \end{frame}
 
-\begin{frame}{Difficulties implementing paging}
-The bootstrapping process:
-\begin{itemize}
-\item How to allocate memory when no memory manager is available?
-\item How to map the Kernel-code at 3GB without losing the EIP?
-\item Solution: activate paging in three steps
-\begin{enumerate}
-	\item First: Create a rough basic mapping for important areas using 4MB paging
-	\item Then initialize all important memory managers and the page frame allocator
-	\item Set up the first 4KB-Pagedirectory and reload CR3 register
-\end{enumerate}
-\end{itemize}	
+\begin{frame}{Paging: The boot process}
+	\begin{itemize}
+		\item How to allocate memory when no memory manager is available?
+		\item How to map the Kernel-code at 3 GiB without losing the EIP?
+		\item Solution: Activate paging in several steps
+	\end{itemize}
+	\pause
+	\begin{figure}
+		\includegraphics[width=0.9\textwidth]{img/paging}
+	\end{figure}
 \end{frame}
 
-\begin{frame}{Difficulties implementing paging}
-Invoking BIOS-calls:
-\begin{itemize}
-\item BIOS-calls are necessary to set up VESA-Graphics
-\item BUT: BIOS-calls run in 16-bit mode without paging
-\item every BIOS-call would crash immediately if used with Higher-Half Kernel
-\item Solution:
-\begin{enumerate}
-\item Switch to a simple 4MB-Pagedirectory that maps the Kernel to low addresses
-\item jump down to low addresses with EIP and switch to 16-bit mode without paging
-\item After returning from BIOS-call restore the old state
-\end{enumerate}
-\end{itemize}	
+\begin{frame}{Allocating heap memory}
+	\begin{enumerate}
+		\setlength\itemsep{1em}
+		\item Invoke Free list manager to find free memory block in heap
+		\item Slice free block (with respect to alignment)
+		\item Return pointer to found block
+		\item If the block was not previously mapped, the first access will generate a pagefault
+		\item Fault handler is invoked during interrupt handling
+		\item Search unused pageframe and map it to the virtual fault address
+		\item Return to program
+	\end{enumerate}
 \end{frame}

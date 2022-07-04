@@ -1,0 +1,346 @@
+% Copyright 2019 by Christian Gesse, christian.gesse@hhu.de
+%
+% credits to 
+% https://www.r-bloggers.com/create-your-own-beamer-template/
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+% See the file doc/licenses/LICENSE for more details.
+%
+% Please note that the logos used in this tmeplate may not
+% be distributed under these licenses.
+
+\mode<presentation>
+
+%
+% necessary includes
+%
+
+\usepackage{pgfcomp-version-0-65}
+\usepackage{color}
+\usepackage{fancyhdr}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb, amsthm, mathrsfs}
+\usepackage{empheq}
+\usepackage{tabularx, multirow}
+\usepackage{graphicx, tikz}
+\usepackage{setspace}
+\usepackage{lmodern}
+\usepackage{ifthen}
+\usepackage{xkeyval}
+
+%
+% define switch between languages
+%
+\newboolean{isEnglish}
+\setboolean{isEnglish}{true} % default is English
+
+\DeclareOption{german}{\setboolean{isEnglish}{false}}
+\DeclareOption{english}{\setboolean{isEnglish}{true}}
+
+%
+% define switch between frametitle positions
+%
+\newboolean{frameTitleStandard}
+\setboolean{frameTitleStandard}{true}
+
+\DeclareOption{frametitletop}{\setboolean{frameTitleStandard}{false}}
+\DeclareOption{frametitlestandard}{\setboolean{frameTitleStandard}{true}}
+
+
+\ProcessOptions
+
+%
+% Set language for document
+%
+
+\ifthenelse{\boolean{isEnglish}}
+{
+	\usepackage[english]{babel}
+	\newcommand{\hhu}{Heinrich Heine University\space}
+}
+{
+	\usepackage[ngerman]{babel}
+	\newcommand{\hhu}{Heinrich-Heine-Universität\space}
+}
+
+%
+% define hhu-colors
+%
+
+% Please use these as primary colors
+\definecolor{hhuBlue}  {RGB}{0,106,179}
+\definecolor{hhuBlack}  {RGB}{0,0,0}
+% additional colors
+\definecolor{hhuGreen}{RGB}{140,177,16}
+\definecolor{hhuRed} {RGB}{190,10,38}
+\definecolor{hhuDarkBlue} {RGB}{0,57,100}
+\definecolor{hhuIceBlue} {RGB}{181,203,214}
+\definecolor{hhuOrange} {RGB}{238,127,0}
+\definecolor{hhuTurquoise}{RGB}{87,186,177}
+
+
+%
+% define some commands and styles
+%
+
+% math-symbols
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+% theorems, definitions etc.
+\ifthenelse{\boolean{isEnglish}}
+{
+	\newtheorem{thm}{Theorem}
+	\newtheorem{lem}[thm]{Lemma}
+	\newtheorem{cor}[thm]{Corollary}
+	
+	\theoremstyle{definition}
+	\newtheorem{notation}[thm]{Notation}
+	\newtheorem{defi}{Definition}
+	\newtheorem*{defi*}{Definition}
+	\newtheorem{prf}{Proof}
+	
+	\theoremstyle{remark}
+	\newtheorem{rem}[thm]{Remark}
+	\newtheorem*{rem*}{Remark}
+}
+{
+	\newtheorem{thm}{Theorem}
+	\newtheorem{lem}[thm]{Lemma}
+	\newtheorem{cor}[thm]{Korollar}
+	
+	\theoremstyle{definition}
+	\newtheorem{notation}[thm]{Notation}
+	\newtheorem{defi}{Definition}
+	\newtheorem*{defi*}{Definition}
+	\newtheorem{prf}{Beweis}
+	
+	\theoremstyle{remark}
+	\newtheorem{rem}[thm]{Beispiel}
+	\newtheorem*{rem*}{Beispiel}
+}
+
+
+
+% Frames without title need a title for correct layout
+\newcommand{\noframetitle}{\frametitle{\phantom{NOTITLE}}}
+
+% highlighted equation
+\newenvironment{highlighted}{\begin{block}{\vspace*{-4ex}}\vspace*{-4.5ex}}{\vspace*{-4ex}\end{block}}
+
+
+%
+%set colors of different items
+%
+
+\setbeamercolor{frametitle}{fg = hhuBlue}
+\setbeamercolor{title}{fg = hhuBlue}
+\setbeamercolor{section in toc}{fg = hhuBlue}
+\setbeamercolor{section in toc shaded}{fg = hhuBlue}
+\setbeamercolor{item}{fg = hhuBlue}
+\setbeamercolor{subitem}{fg = hhuBlue}
+\setbeamercolor{subsubitem}{fg = hhuBlue}
+\setbeamercolor{description item}{fg = hhuBlue}
+\setbeamercolor{caption}{fg = hhuBlue}
+\setbeamercolor{caption name}{fg = hhuBlue}
+\setbeamercolor{footline}{fg=white,bg=hhuBlue}
+
+% set colors for blocks
+\setbeamercolor{block title}{fg = hhuBlue, bg = hhuBlue!18!white}
+\setbeamercolor{block body}{bg = hhuBlue!5!white}
+
+\setbeamercolor{block title alerted}{fg = hhuBlue, bg = hhuBlue!18!white}
+\setbeamercolor{block body alerted}{bg = hhuBlue!5!white}
+
+\setbeamercolor{block title example}{fg = hhuBlue, bg = hhuBlue!18!white}
+\setbeamercolor{block body example}{bg = hhuBlue!5!white}
+
+% standard text color
+\setbeamercolor{normal text}{fg = hhuBlack}
+
+% color for literature
+\setbeamercolor{bibliography entry author}{fg=hhuBlack}
+\setbeamercolor{bibliography entry title}{fg=hhuBlue} 
+\setbeamercolor{bibliography entry location}{fg=hhuBlack} 
+\setbeamercolor{bibliography entry note}{fg=hhuBlack}
+\setbeamercolor{bibliography item}{fg=hhuBlack}
+
+%
+% Fonts
+%
+
+\usefonttheme{professionalfonts}
+% fixed font sizes
+\setbeamerfont{title}{size = \fontsize{12pt}{14pt}}
+\setbeamerfont{titleLarge}{size = \fontsize{18pt}{22pt}}
+\setbeamerfont{frametitle}{size = \fontsize{16pt}{0pt}}
+\setbeamerfont{footline}{size = \fontsize{6pt}{0pt}}
+
+%
+% Inner theme
+%
+
+\useinnertheme{rectangles}
+\setbeamertemplate{itemize items}[square]
+\setbeamertemplate{enumerate items}[square]
+
+%
+% Outer theme
+%
+
+% set position of text in frame
+\setbeamersize{text margin left=0.7cm}
+\setbeamersize{text margin right=0.7cm}
+
+% headline
+\newcommand{\LogoLine}{%
+	\raisebox{-12mm}[0pt][0pt]{%
+		\begin{pgfpicture}{0mm}{0mm}{0mm}{0mm}
+			\pgfsetlinewidth{0.28mm}
+			\color{hhuBlue}
+			\pgfline{\pgfpoint{-3mm}{1mm}}{\pgfpoint{20.8cm}{1mm}}
+\end{pgfpicture}}}
+
+\setbeamertemplate{headline}{\LogoLine}
+
+% set logo
+\ifthenelse{\boolean{isEnglish}}
+{
+	\setbeamertemplate{sidebar canvas left}{
+		\vspace*{3pt}\hspace*{7.5pt}
+		{\includegraphics[height=28pt]{img/hhu-logo-en.pdf}}}
+}
+{
+	\setbeamertemplate{sidebar canvas left}{
+		\vspace*{3pt}\hspace*{7.5pt}
+		{\includegraphics[height=28pt]{img/hhu-logo-de.pdf}}}
+}
+
+
+% place frame titles
+\ifthenelse{\boolean{frameTitleStandard}}
+{	
+	% standard position for frametitle
+	\setbeamertemplate{frametitle}{
+		\vspace*{13mm}\hspace*{-2mm}
+		\insertframetitle
+		\vspace{0mm}
+	}
+}
+{
+	% place frametitle beside the logo
+	\setbeamertemplate{frametitle}{
+		\vspace*{3.5mm}\hspace*{25mm}
+		\insertframetitle
+		\vspace{3mm}
+		
+	}
+}
+
+
+%
+% create footline
+%
+
+\setbeamertemplate{footline}{
+	\usebeamerfont{structure}
+	% make shure that footline is divided into 3 equal parts
+	\hspace{-1.55mm}
+	\begin{beamercolorbox}[wd=0.33\paperwidth,ht=2.5ex,dp=1.2ex,left]{footline}
+		\hspace*{3mm}\insertshortauthor
+	\end{beamercolorbox}
+	\hspace{-1.55mm}
+	\begin{beamercolorbox}[wd=0.35\paperwidth,ht=2.5ex,dp=1.2ex,center]{footline}
+		\insertshorttitle
+	\end{beamercolorbox}
+	\hspace{-1.55mm}
+	\begin{beamercolorbox}[wd=0.33\paperwidth,ht=2.5ex,dp=1.2ex,right]{footline}
+		\insertframenumber/\inserttotalframenumber\hspace*{2.0mm}
+	\end{beamercolorbox}
+}
+% disable navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+%
+%title page
+%
+
+% commands for title etc. 
+
+% Title
+\newcommand{\MyTitle}{
+	\textcolor{hhuBlue}{\inserttitle}}
+
+% Subtitle
+\newcommand{\MySubTitle}{%
+	\insertsubtitle}
+
+% Author
+\newcommand{\MyAuthor}{
+	\insertauthor}
+
+% Institute
+\newcommand{\MyInstitute}{
+	\textit{\insertinstitute}}
+
+% Date
+\newcommand{\MyDate}{
+	\insertdate}
+
+% declare image that will be used as the logo
+\ifthenelse{\boolean{isEnglish}}
+{
+	\pgfdeclareimage[width = 0.35\paperwidth]{big}{img/hhu-logo-vert-en.pdf}
+}
+{
+	\pgfdeclareimage[width = 0.35\paperwidth]{big}{img/hhu-logo-vert-de.pdf}
+}
+
+
+%
+% Define titlepage
+%
+\setbeamertemplate{title page}{
+	\vspace{4mm}
+	\begin{center}
+		\usebeamerfont{titleLarge}
+		\MyTitle
+	\end{center}
+	\vspace{-2mm}
+	
+	\begin{center}
+		\usebeamerfont{title}
+		\MySubTitle
+	\end{center}
+	\vspace{-3mm}
+
+	\begin{center}
+		\usebeamerfont{title}
+		\centering\MyAuthor
+	\end{center}
+	\vspace{-2mm}
+	
+	\begin{center}
+		\hspace{-3pt}\pgfuseimage{big}
+	\end{center}
+ 	\vspace{-2mm}
+	
+	\begin{center}
+		\usebeamerfont{title}
+		\MyDate
+	\end{center}
+	\vspace{4mm}
+}
+
+
+
+
+
