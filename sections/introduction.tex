@@ -35,7 +35,7 @@
 			\item Unified Library
 			\begin{itemize}
 				\item Single codebase for user- and kernel-space library
-				\item Functions requiring kernel access are outsourced into an interface (implemented two time - for kernel and user space)
+				\item Functions requiring kernel access are outsourced into an interface (implemented two times - for kernel and user space)
 				\item Kernel access from user space via system calls (software interrupts)
 			\end{itemize}
 			\pause
@@ -43,7 +43,7 @@
 			\begin{itemize}
 				\item Virtual Filesystem (can mount physical filesystems)
 				\item Hardware support (Keyboard, PCI, Floppy AHCI, VESA \& CGA Graphics)
-				\item Compatible with UEFI and BIOS systems (BIOS calls are supported)
+				\item Multiboot compatible: Bootable on UEFI and BIOS systems (BIOS calls are supported)
 				\item Own UEFI bootloader (towboot, developed by Niklas Sombert)
 				\item Experimental support for networking, thanks to several bachelors thesis (2 drivers and a UDP/IP Stack)
 			\end{itemize}	
