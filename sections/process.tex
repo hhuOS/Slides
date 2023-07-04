@@ -3,11 +3,19 @@
 \begin{frame}{Process Scheduling}
 	\begin{itemize}
 		\setlength\itemsep{1em}
-		\item Global scheduler manages processes in a queue
-		\item Timer invokes scheduler every 10ms to switch to next process (and address space)
-		\item Each process has a separate thread scheduler, switching the current thread each time the process becomes active
+		\item Global scheduler manages threads in a queue
+		\item Timer invokes scheduler every 10ms to switch to next thread
+		\begin{itemize}
+			\item If current and next threads belong to different processes, address space needs to be switched
+		\end{itemize}
 		\item Threads can be blocked and unblocked by other threads
 		\item Threads can sleep for a defined time
+		\begin{itemize}
+			\item Scheduler manages sleeping threads in a separate queue
+		\end{itemize}
 		\item It is possible to join other threads (or processes)
+		\begin{itemize}
+			\item Each thread has a list of joining threads, that are reassigned to the scheduler, once the thread has finished
+		\end{itemize}
 	\end{itemize}	
 \end{frame}

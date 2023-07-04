@@ -7,7 +7,7 @@
 		\item written for x86 32-bit architecture
 		\item written in C++ and x86-Assembler using gcc and nasm
 		\item Open-Source, published under the GPL v3 license
-		\item $\sim25000$ lines of code
+		\item $\sim43000$ lines of code
 	\end{itemize}
 	\end{frame}
 	
@@ -42,10 +42,17 @@
 			\item Further features
 			\begin{itemize}
 				\item Virtual Filesystem (can mount physical filesystems)
-				\item Hardware support (Keyboard, PCI, Floppy AHCI, VESA \& CGA Graphics)
-				\item Multiboot compatible: Bootable on UEFI and BIOS systems (BIOS calls are supported)
+				\item Hardware support
+					\begin{itemize}
+						\item Basic I/O: Keyboard \& Mouse, Serial \& Parallel Ports, VESA \& CGA graphics, PCI \& ISA bus, PC Speaker
+						\item Interrupt: Programmable Interrupt Controller (PIC), APIC
+						\item Time: Programmable Interval Timer Real Time Clock
+						\item Storage: Floppy, IDE
+						\item Network: Realtek RTL8139 (bachelor thesis by Alexander Hansen)
+					\end{itemize}
+				\item Multiboot compatible: Bootable on UEFI and BIOS systems
 				\item Own UEFI bootloader (towboot, developed by Niklas Sombert)
-				\item Experimental support for networking, thanks to several bachelors thesis (2 drivers and a UDP/IP Stack)
+				\item UDP/IP-stack (based on bachelor thesis by Hannes Feil)
 			\end{itemize}	
 		\end{itemize}
 	\end{frame}
