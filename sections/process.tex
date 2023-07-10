@@ -6,7 +6,7 @@
 		\item Global scheduler manages threads in a queue
 		\item Timer invokes scheduler every 10ms to switch to next thread
 		\begin{itemize}
-			\item If current and next threads belong to different processes, address space needs to be switched
+			\item If current and next threads belong to different processes, address space needs to be switched (flush TLB)
 		\end{itemize}
 		\item Threads can be blocked and unblocked by other threads
 		\item Threads can sleep for a defined time
