@@ -6,8 +6,8 @@
 		\item A small operating system for teaching and learning purposes
 		\item written for x86 32-bit architecture
 		\item written in C++ and x86-Assembler using gcc and nasm
-		\item Open-Source, published under the GPL v3 license
-		\item $\sim43000$ lines of code
+		\item Open-Source, published under the GPL v3 license (\url{https://github.com/hhuOS/hhuOS})
+		\item $\sim60000$ lines of code
 	\end{itemize}
 	\end{frame}
 	
@@ -19,12 +19,12 @@
 				\item Binary files are executed as processes
 				\item Each process has its own address space
 			\end{itemize}
-			\pause
+			\vspace{1.0em}
 			\item Adress spaces and memory management
 			\begin{itemize}
 				\item Using x86-Paging mechanism (virtual/physical memory)
 				\item Lazy mapping implementation
-				\item Kernel address space is always mapped at 3 GiB (not accessible from user space)
+				\item Kernel address space is always mapped below 128 MiB (not accessible from user space)
 				\item Different memory managing algorithms are implemented (Free List, Bitmap, Table)
 			\end{itemize}
 		\end{itemize}
@@ -38,22 +38,32 @@
 				\item Functions requiring kernel access are outsourced into an interface (implemented two times - for kernel and user space)
 				\item Kernel access from user space via system calls (software interrupts)
 			\end{itemize}
-			\pause
-			\item Further features
+			\vspace{1.0em}
+			\item Filesystem
 			\begin{itemize}
 				\item Virtual Filesystem (can mount physical filesystems)
-				\item Hardware support
-					\begin{itemize}
-						\item Basic I/O: Keyboard \& Mouse, Serial \& Parallel Ports, VESA \& CGA graphics, PCI \& ISA bus
-						\item Interrupt: Programmable Interrupt Controller (PIC), APIC (bachelor thesis by Christoph Urlacher)
-						\item Time: Programmable Interval Timer, Real Time Clock
-						\item Storage: Floppy, IDE (bachelor thesis by Tim Laursichkat)
-						\item Sound: PC Speaker, SoundBlaster
-						\item Network: Realtek RTL8139 (bachelor thesis by Alexander Hansen)
-					\end{itemize}
-				\item Multiboot2 compatible: Bootable on UEFI and BIOS systems
-				\item Own UEFI bootloader (towboot, developed by Niklas Sombert)
+				\item FAT (using \href{http://elm-chan.org/fsw/ff/00index\_e.html}{FatFs})
+				\item ISO9660 (bachelor thesis by Moritz Riefer)
+			\end{itemize}
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}{hhuOS - Features}
+		\begin{itemize}
+			\item Hardware Support:
+			\begin{itemize}
+				\item Basic I/O: Keyboard \& Mouse, Serial \& Parallel Ports, VESA \& CGA graphics, PCI \& ISA bus
+				\item Interrupt: Programmable Interrupt Controller (PIC), APIC (bachelor thesis by Christoph Urlacher)
+				\item Time: Programmable Interval Timer, Real Time Clock, APIC Timer, ACPI Timer
+				\item Storage: Floppy, IDE (bachelor thesis by Tim Laursichkat; enhanced with ATAPI support by Moritz Riefer), AHCI (bachelor thesis by Manuel Angelescu)
+				\item Sound: PC Speaker, SoundBlaster
+				\item Network: Realtek RTL8139 (bachelor thesis by Alexander Hansen), Ne2000 (bachelor thesis by Marcel Thiel)
+			\end{itemize}
+			\item Further features:
+			\begin{itemize}
+				\item Multiboot2 compatible: Bootable on BIOS and UEFI systems
+				\item Own UEFI bootloader (\href{https://github.com/hhuOS/towboot}{towboot}, developed by Niklas Sombert)
 				\item UDP/IP-stack (based on bachelor thesis by Hannes Feil)
-			\end{itemize}	
+			\end{itemize}
 		\end{itemize}
 	\end{frame}
